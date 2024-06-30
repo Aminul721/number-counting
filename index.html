@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="zxx">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <title>number | conting</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+      
+      <link type="text/css" href="style.css" rel="stylesheet"/>
+      <link type="text/css" href="assets/css/responsive.css" rel="stylesheet"/>
+      <!--[if lt IE 9]><script src="assets/js/modernizr.min.js" type="text/javascript"></script><![endif]-->
+   </head>
+   <body>
+      <div id="wrapper">         
+         <!-- banner_area start-->
+         <div class="banner_main_container big_screen">
+            <div class="banner_area">
+               <div class="banner_wrap center_content">
+                  <div class="banner_bx">
+                     <div class="request_numcount_bx">
+                        <div class="request_numcount">
+                           <strong class="timer count-number" data-output="90.628.758,55" data-from="0" data-to="9062875855">90628758.55</strong>
+                        </div>
+                        <h6>Behandelde aanvragen</h6>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- banner_area end-->
+
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/num_counting.js"></script>
+      <script src="assets/js/char_script.js"></script>
+      <script src="assets/js/custom.js"></script>
+      <script>
+         (function ($) {
+            // start count number
+            $('.count-number').data('countToOptions', {
+               formatter: function (value, options) {
+                  return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, '.');
+               },
+               onComplete: function(value){
+                  const dataToNum = jQuery('.count-number').attr("data-to");
+                  jQuery(this).html($(this).attr('data-output'));
+               }
+            });
+
+
+            /*$('.count-number').data('countToOptions', {
+               formatter: function (value, options) {
+                  if((options.symbol == "%") && (options.str == "tot")){
+                        return value.toFixed(options.decimals).replace(/\B(?=(?:\d{2})+(?!\d))/g, ' tot ');
+                  }else if((options.symbol == "%") && (options.symbolpluse == "+")) {
+                        if(options.to === Math.round(value)){
+                           return options.output;
+                        }else{
+                           return value.toFixed(options.decimals).replace(/\B(?=(?:\d{2})+(?!\d))/g, ',')
+                        }
+                  }else if ((options.symbol == "%")){
+                        return value.toFixed(options.decimals).replace(/\B(?=(?:\d{2})+(?!\d))/g, '');
+                  }else{
+                        return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, '.');
+                  }
+               }
+            });*/
+
+            // start all the timers
+            $('.timer').each(count);  
+            function count(options) {
+               var $this = $(this);
+               options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+               $this.countTo(options);
+            }
+         })(jQuery);
+      </script>
+   </body>
+</html>
